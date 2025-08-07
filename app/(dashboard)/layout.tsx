@@ -1,14 +1,12 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { cookies } from "next/headers";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
+  const defaultOpen = true
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>

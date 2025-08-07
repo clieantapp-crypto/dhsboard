@@ -34,7 +34,7 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
+    <Sidebar side="right">
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
           <Droplets className="w-8 h-8 text-primary" />

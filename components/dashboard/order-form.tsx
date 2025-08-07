@@ -30,7 +30,7 @@ const formSchema = z.object({
 
 export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       customerName: "",
       amount: 0,
@@ -46,9 +46,9 @@ export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit as any)as any} className="space-y-8">
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="customerName"
           render={({ field }) => (
             <FormItem>
@@ -61,7 +61,7 @@ export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
           )}
         />
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="amount"
           render={({ field }) => (
             <FormItem>
@@ -74,7 +74,7 @@ export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
           )}
         />
         <FormField
-          control={form.control}
+          control={form.control as any}
           name="status"
           render={({ field }) => (
             <FormItem>

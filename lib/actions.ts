@@ -1,5 +1,3 @@
-"use server";
-
 import { collection, addDoc, doc, updateDoc, deleteDoc, Timestamp } from "firebase/firestore";
 import { db } from "./firebase";
 import { revalidatePath } from "next/cache";
