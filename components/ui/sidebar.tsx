@@ -150,7 +150,7 @@ const SidebarProvider = React.forwardRef<
               "group/sidebar-wrapper flex min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar",
               className
             )}
-            ref={ref}
+            ref={ref as any} 
             {...props}
           >
             {children}
@@ -190,7 +190,7 @@ const Sidebar = React.forwardRef<
             "flex h-full w-[--sidebar-width] flex-col bg-sidebar text-sidebar-foreground",
             className
           )}
-          ref={ref}
+          ref={ref as any} 
           {...props}
         >
           {children}
@@ -224,7 +224,7 @@ const Sidebar = React.forwardRef<
 
     return (
       <div
-        ref={ref}
+        ref={ref as any} 
         className="group peer hidden text-sidebar-foreground md:block"
         data-state={state}
         data-collapsible={state === "collapsed" ? collapsible : ""}
@@ -277,7 +277,7 @@ const SidebarTrigger = React.forwardRef<
 
   return (
     <Button
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
@@ -303,7 +303,7 @@ const SidebarRail = React.forwardRef<
 
   return (
     <button
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="rail"
       aria-label="Toggle Sidebar"
       tabIndex={-1}
@@ -330,7 +330,7 @@ const SidebarInset = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <main
-      ref={ref}
+      ref={ref as any} 
       className={cn(
         "relative flex w-full flex-1 flex-col bg-background",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow",
@@ -348,7 +348,7 @@ const SidebarInput = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <Input
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="input"
       className={cn(
         "h-8 w-full bg-background shadow-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
@@ -366,7 +366,7 @@ const SidebarHeader = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="header"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
@@ -381,7 +381,7 @@ const SidebarFooter = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="footer"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
@@ -396,7 +396,7 @@ const SidebarSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <Separator
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="separator"
       className={cn("mx-2 w-auto bg-sidebar-border", className)}
       {...props}
@@ -411,7 +411,7 @@ const SidebarContent = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="content"
       className={cn(
         "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
@@ -429,7 +429,7 @@ const SidebarGroup = React.forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <div
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="group"
       className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       {...props}
@@ -446,7 +446,7 @@ const SidebarGroupLabel = React.forwardRef<
 
   return (
     <Comp
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="group-label"
       className={cn(
         "flex h-8 shrink-0 items-center rounded-md px-2 text-xs font-medium text-sidebar-foreground/70 outline-none ring-sidebar-ring transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
@@ -467,7 +467,7 @@ const SidebarGroupAction = React.forwardRef<
 
   return (
     <Comp
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="group-action"
       className={cn(
         "absolute right-3 top-3.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0",
@@ -568,7 +568,7 @@ const SidebarMenuButton = React.forwardRef<
 
     const button = (
       <Comp
-        ref={ref}
+        ref={ref as any} 
         data-sidebar="menu-button"
         data-size={size}
         data-active={isActive}
@@ -613,7 +613,7 @@ const SidebarMenuAction = React.forwardRef<
 
   return (
     <Comp
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="menu-action"
       className={cn(
         "absolute right-1 top-1.5 flex aspect-square w-5 items-center justify-center rounded-md p-0 text-sidebar-foreground outline-none ring-sidebar-ring transition-transform hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 peer-hover/menu-button:text-sidebar-accent-foreground [&>svg]:size-4 [&>svg]:shrink-0",
@@ -667,7 +667,7 @@ const SidebarMenuSkeleton = React.forwardRef<
 
   return (
     <div
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="menu-skeleton"
       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
       {...props}
@@ -727,7 +727,7 @@ const SidebarMenuSubButton = React.forwardRef<
 
   return (
     <Comp
-      ref={ref}
+      ref={ref as any} 
       data-sidebar="menu-sub-button"
       data-size={size}
       data-active={isActive}
