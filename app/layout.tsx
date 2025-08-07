@@ -5,7 +5,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 
 export const metadata = {
-  title: "لوحة تحكم أكوا فلو",
+  title: "لوحة تحكم H2O",
   description: "لوحة تحكم لإدارة متجر المياه",
 };
 

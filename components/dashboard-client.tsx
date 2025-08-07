@@ -57,7 +57,7 @@ export function DashboardClient({ data }: { data: DashboardData }) {
 
   return (
     <div className="flex flex-col w-full min-h-screen bg-muted/40">
-      <header className="sticky top-0 flex items-center h-16 px-4 border-b bg-background shrink-0 md:px-6 z-10">
+      <header className="sticky top-0 flex items-center h-16 px-4 border-b bg-background shrink-0 md:px-6 z-10 ">
         <SidebarTrigger />
         <div className="flex items-center w-full gap-4 md:mr-auto md:gap-2 lg:gap-4">
           <form className="flex-1 ml-auto sm:flex-initial">

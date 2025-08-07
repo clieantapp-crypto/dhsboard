@@ -54,7 +54,7 @@ export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
             <FormItem>
               <FormLabel>اسم العميل</FormLabel>
               <FormControl>
-                <Input placeholder="مثال: جون دو" {...field} />
+                <Input placeholder="مثال: admin" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
