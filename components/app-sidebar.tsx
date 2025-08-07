@@ -34,11 +34,11 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar side="right" className="bg-gray-800 text-white">
+    <Sidebar side="right" className="bg-white">
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
           <Droplets className="w-8 h-8 text-primary" />
-          <span className="text-xl font-semibold">H2O</span>
+          <span className="text-xl font-semibold">أكوا فلو</span>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -65,7 +65,7 @@ export function AppSidebar() {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton>
               <User className="w-4 h-4" />
-              <span>admin</span>
+              <span>جون دو</span>
               <ChevronUp className="mr-auto h-4 w-4" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
