@@ -30,7 +30,7 @@ const formSchema = z.object({
 
 export function OrderForm({ setOpen }: { setOpen: (open: boolean) => void }) {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: {
       customerName: "",
       amount: 0,
