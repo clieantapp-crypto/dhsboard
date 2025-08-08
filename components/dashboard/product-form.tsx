@@ -22,7 +22,7 @@ interface ProductFormProps {
 
 export function ProductForm({ setOpen, initialData }: ProductFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(formSchema) as any,
     defaultValues: initialData || { name: "", price: 0, stock: 0 },
   });
 
