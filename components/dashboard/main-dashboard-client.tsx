@@ -12,6 +12,7 @@ import { DollarSign, ShoppingCart, Users, PackageMinus } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line, Tooltip } from "recharts";
 import { format, subDays, isWithinInterval, differenceInDays } from 'date-fns';
 import type { DateRange } from "react-day-picker";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 
 type ClientOrder = Omit<OrderType, 'createdAt'> & { createdAt: Date };
 type ClientCustomer = Omit<CustomerType, 'joinedAt'> & { joinedAt: Date };
@@ -55,38 +56,38 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
     };
 
     const stats = useMemo(() => {
-        const currentRevenue = filteredData.currentPeriodOrders.reduce((sum, o) => sum + o.amount, 0);
-        const prevRevenue = filteredData.prevPeriodOrders.reduce((sum, o) => sum + o.amount, 0);
-        const currentOrdersCount = filteredData.currentPeriodOrders.length;
-        const prevOrdersCount = filteredData.prevPeriodOrders.length;
-        const currentCustomersCount = filteredData.currentPeriodCustomers.length;
-        const prevCustomersCount = filteredData.prevPeriodCustomers.length;
+        const currentRevenue = filteredData?.currentPeriodOrders?.reduce((sum, o) => sum + o.amount, 0);
+        const prevRevenue = filteredData?.prevPeriodOrders?.reduce((sum, o) => sum + o.amount, 0);
+        const currentOrdersCount = filteredData?.currentPeriodOrders?.length;
+        const prevOrdersCount = filteredData?.prevPeriodOrders?.length;
+        const currentCustomersCount = filteredData?.currentPeriodCustomers?.length;
+        const prevCustomersCount = filteredData?.prevPeriodCustomers?.length;
 
         return {
-            revenue: { value: currentRevenue, change: calculatePercentageChange(currentRevenue, prevRevenue) },
-            orders: { value: currentOrdersCount, change: calculatePercentageChange(currentOrdersCount, prevOrdersCount) },
-            customers: { value: currentCustomersCount, change: calculatePercentageChange(currentCustomersCount, prevCustomersCount) },
+            revenue: { value: currentRevenue, change: calculatePercentageChange(currentRevenue!, prevRevenue!) },
+            orders: { value: currentOrdersCount, change: calculatePercentageChange(currentOrdersCount!, prevOrdersCount!) },
+            customers: { value: currentCustomersCount, change: calculatePercentageChange(currentCustomersCount!, prevCustomersCount!) },
             lowStock: { value: products.filter(p => p.stock < 50).length }
         };
     }, [filteredData, products]);
 
     const salesChartData = useMemo(() => {
         const salesByDay: { [key: string]: number } = {};
-        filteredData.currentPeriodOrders.forEach(order => {
+        filteredData?.currentPeriodOrders?.forEach(order => {
             const day = format(order.createdAt, 'yyyy-MM-dd');
             salesByDay[day] = (salesByDay[day] || 0) + order.amount;
         });
         return Object.entries(salesByDay).map(([date, sales]) => ({ date, sales })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    }, [filteredData.currentPeriodOrders]);
+    }, [filteredData?.currentPeriodOrders]);
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col  w-full gap-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <h1 className="text-2xl font-bold tracking-tight">أهلاً بك مجدداً!</h1>
-                <DateRangePicker date={dateRange} onDateChange={setDateRange} />
+                <DateRangePicker date={dateRange as any} onDateChange={setDateRange} />
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <StatCard title="إجمالي الإيرادات" value={new Intl.NumberFormat("ar-SA", { style: "currency", currency: "SAR" }).format(stats.revenue.value)} description={stats.revenue.change} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
+                <StatCard title="إجمالي الإيرادات" value={new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD" }).format(stats?.revenue?.value)} description={stats.revenue.change} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="إجمالي الطلبات" value={`+${stats.orders.value}`} description={stats.orders.change} icon={<ShoppingCart className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="عملاء جدد" value={`+${stats.customers.value}`} description={stats.customers.change} icon={<Users className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="مخزون منخفض" value={`${stats.lowStock.value} أصناف`} description="أقل من 50 وحدة" icon={<PackageMinus className="h-4 w-4 text-muted-foreground" />} />
@@ -98,7 +99,7 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
                         <ResponsiveContainer width="100%" height={350}>
                             <LineChart data={salesChartData}>
                                 <XAxis dataKey="date" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(str) => format(new Date(str), 'dd/MM')} />
-                                <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `SAR ${value}`} />
+                                <YAxis stroke="#888888" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(value) => `JOD ${value}`} />
                                 <Tooltip />
                                 <Line type="monotone" dataKey="sales" stroke="#16a34a" dot={false} />
                             </LineChart>
@@ -116,7 +117,7 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
                                         <p className="text-sm font-medium leading-none">{order.customerName}</p>
                                         <p className="text-sm text-muted-foreground">{format(order.createdAt, 'dd/MM/yyyy')}</p>
                                     </div>
-                                    <div className="mr-auto font-medium">{new Intl.NumberFormat("ar-SA", { style: "currency", currency: "SAR" }).format(order.amount)}</div>
+                                    <div className="mr-auto font-medium">{new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD" }).format(order.amount)}</div>
                                 </div>
                             ))}
                         </div>
