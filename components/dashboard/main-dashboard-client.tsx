@@ -7,11 +7,10 @@ import type { Order as OrderType, Product as ProductType, Customer as CustomerTy
 import { StatCard } from "./stat-card";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { DateRangePicker } from "@/components/ui/date-range-picker";
+import { DateRangePicker, DateRangePickerProps } from "@/components/ui/date-range-picker";
 import { DollarSign, ShoppingCart, Users, PackageMinus } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line, Tooltip } from "recharts";
 import { format, subDays, isWithinInterval, differenceInDays } from 'date-fns';
-import type { DateRange } from "react-day-picker";
 import { Avatar, AvatarFallback } from "../ui/avatar";
 
 type ClientOrder = Omit<OrderType, 'createdAt'> & { createdAt: Date };
@@ -25,7 +24,7 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
     const [orders, setOrders] = useState<ClientOrder[]>(() => initialOrders.map(o => ({...o, createdAt: new Date(o.createdAt)})));
     const [customers, setCustomers] = useState<ClientCustomer[]>(() => initialCustomers.map(c => ({...c, joinedAt: new Date(c.joinedAt)})));
     const [products, setProducts] = useState<ProductType[]>(initialProducts);
-    const [dateRange, setDateRange] = useState<DateRange | undefined>({ from: subDays(new Date(), 29), to: new Date() });
+    const [dateRange, setDateRange] = useState<any>({ from: subDays(new Date(), 29), to: new Date() });
 
     useEffect(() => {
         const unsubOrders = onSnapshot(query(collection(db, "orders"), orderBy("createdAt", "desc")), (snapshot) => setOrders(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data(), createdAt: (doc.data().createdAt as Timestamp).toDate() } as ClientOrder))));
@@ -84,10 +83,10 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
         <div className="flex flex-col  w-full gap-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <h1 className="text-2xl font-bold tracking-tight">أهلاً بك مجدداً!</h1>
-                <DateRangePicker date={dateRange as any} onDateChange={setDateRange} />
+                <DateRangePicker date={dateRange } onDateChange={setDateRange} />
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                <StatCard title="إجمالي الإيرادات" value={new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD" }).format(stats?.revenue?.value)} description={stats.revenue.change} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
+                <StatCard title="إجمالي الإيرادات" value={new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD" }).format(stats?.revenue?.value as any)} description={stats.revenue.change} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="إجمالي الطلبات" value={`+${stats.orders.value}`} description={stats.orders.change} icon={<ShoppingCart className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="عملاء جدد" value={`+${stats.customers.value}`} description={stats.customers.change} icon={<Users className="h-4 w-4 text-muted-foreground" />} />
                 <StatCard title="مخزون منخفض" value={`${stats.lowStock.value} أصناف`} description="أقل من 50 وحدة" icon={<PackageMinus className="h-4 w-4 text-muted-foreground" />} />
