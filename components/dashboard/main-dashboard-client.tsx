@@ -83,7 +83,7 @@ export function MainDashboardClient({ initialOrders, initialCustomers, initialPr
         <div className="flex flex-col  w-full gap-4">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <h1 className="text-2xl font-bold tracking-tight">أهلاً بك مجدداً!</h1>
-                <DateRangePicker date={dateRange } onDateChange={setDateRange} />
+                {/* <DateRangePicker date={dateRange } onDateChange={setDateRange} /> */}
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <StatCard title="إجمالي الإيرادات" value={new Intl.NumberFormat("ar-JO", { style: "currency", currency: "JOD" }).format(stats?.revenue?.value as any)} description={stats.revenue.change} icon={<DollarSign className="h-4 w-4 text-muted-foreground" />} />
